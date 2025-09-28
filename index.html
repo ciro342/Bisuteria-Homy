@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bella Joya — Bisutería</title>
+  <meta name="description" content="Tienda online de bisutería artesanal: aretes, anillos, collares y pulseras. Filtra por categoría, busca por nombre y contacta por WhatsApp." />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main>
+    <section class="hero">
+      <div class="hero-inner container">
+        <div class="hero-text">
+          <h2>Diseños únicos de bisutería que cuentan historias</h2>
+          <p>Aretes, collares, anillos y pulseras hechos a mano con materiales seleccionados. Explora, filtra y encuentra tu próxima pieza favorita.</p>
+          <div class="hero-cta">
+            <a class="cta" href="#catalogo">Ver catálogo</a>
+<a class="cta-outline" href="https://wa.me/3125785412" target="_blank">
+    <i class="fab fa-whatsapp"></i> Contactar por WhatsApp
+</a>          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="catalogo" class="container">
+      <h3 style="font-size:22px;margin-bottom:10px">Catálogo</h3>
+      <div class="controls">
+        <div class="search">
+          <input id="search" placeholder="Busca por nombre (ej: Perla, Solitario...)" aria-label="Buscar productos">
+        </div>
+        <div class="filters" role="tablist" aria-label="Filtrar por categoría">
+          <button class="chip active" data-filter="todos">Todos</button>
+          <button class="chip" data-filter="aretes">Aretes</button>
+          <button class="chip" data-filter="anillos">Anillos</button>
+          <button class="chip" data-filter="collares">Collares</button>
+          <button class="chip" data-filter="pulseras">Pulseras</button>
+        </div>
+        <div class="sort">
+          <select id="order">
+            <option value="default">Orden: Recomendado</option>
+            <option value="name-asc">Nombre A-Z</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="grid" class="grid" aria-live="polite">
+        <!-- Cards generadas por JS -->
+      </div>
+
+      <!-- Contact quick -->
+      <div style="margin-top:26px;display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+        <div style="background:white;padding:12px;border-radius:12px;box-shadow:var(--card-shadow);flex:1;min-width:260px">
+          <strong>¿Prefieres hablar?</strong>
+          <div style="margin-top:8px;color:var(--muted)">Contáctanos por WhatsApp y te ayudamos a elegir talla, envío y disponibilidad.</div>
+        </div>
+        <a class="btn-contact" href="https://wa.me/3125785412" target="_blank">Enviar mensaje</a>
+      </div>
+
+    </section>
+
+
+
+  </main>
+
+  <footer>
+    © <span id="year"></span> Bella Joya — Hecho a mano · <a href="https://wa.me/3125785412">WhatsApp</a>
+  </footer>
+
+  <!-- Modal detalle -->
+  <div id="modal" class="modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-card" role="document">
+      <div class="modal-media"><img id="modal-img" src="" alt=""></div>
+      <div class="modal-body">
+        <div style="display:flex;gap:8px;align-items:center">
+          <div style="font-size:18px;font-weight:700" id="modal-title"></div>
+          <button class="close" id="close-modal" aria-label="Cerrar">✕</button>
+        </div>
+        <div style="color:var(--muted)" id="modal-desc"></div>
+        <div style="display:flex;gap:8px;margin-top:12px">
+    <a id="modal-whatsapp" class="btn buy" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-whatsapp"></i> Pedir por WhatsApp
+    </a>
+</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Datos de ejemplo
+    const PRODUCTS = [
+      {id:1,name:'Collar de flor amarilla',category:'collares',desc:'Elegantes Collar de flor amarilla .',img:'assets/collaramarillo.png'},
+      {id:2,name:'Collar con aretes',category:'collares',desc:'Collar con aretes.',img:'assets/collarColor.png'},
+      {id:3,name:'Arete Verde',category:'aretes',desc:'Arete verde brillante',img:'assets/areteVerde.jpg'},
+      {id:4,name:'Collar con aretes',category:'collares',desc:'Diseño de collar amarillo diferente con aretes incluidos.',img:'assets/ama.png'},
+      {id:5,name:'Collar de flor azul con aretes',category:'collares',desc:'Collar de flor azul con aretes de combinacion incluidos',img:'assets/blueflower.jpg'},
+      {id:6,name:'Collar de flor de colores con aretes de mismo color',category:'collares',desc:'collar de flores de coloresc con aretes con misma combinacion de colores',img:'assets/collred.jpg'},
+      {id:7,name:'Collar de colores ',category:'collares',desc:'Collar de colores.',img:'assets/collcolored.jpg'},
+      {id:8,name:'Aretes multi color',category:'aretes',desc:'Aretes de flor de dos colores a elegir',img:'assets/aretesmulticolor.jpg'},
+      {id:9,name:'collar',category:'collares',desc:'Collar de colores',img:'assets/C1.jpg'},
+      {id:10,name:'collar amarillo',category:'collares',desc:'Collar amarillo',img:'assets/C2.jpg'},
+      {id:10,name:'collar ',category:'collares',desc:'Collar ',img:'assets/C3.jpg'},
+    ];
+
+    // Helpers
+    const $ = sel => document.querySelector(sel);
+    const $$ = sel => Array.from(document.querySelectorAll(sel));
+
+    // RENDER
+    function renderGrid(items){
+      const grid = $('#grid');
+      grid.innerHTML = '';
+      items.forEach(p=>{
+        const card = document.createElement('article');
+        card.className = 'card';
+        card.innerHTML = `
+          <div style="position:relative">
+            <div class="badge">${p.category}</div>
+            <div class="media"><img loading="lazy" src="${p.img}" alt="${p.name}"></div>
+          </div>
+          <div class="card-body">
+            <div class="meta"><div class="title">${p.name}</div></div>
+            <div class="desc">${p.desc}</div>
+            <div class="actions">
+              <button class="btn buy" data-id="${p.id}">Comprar</button>
+              <button class="btn info" data-id="${p.id}">Ver</button>
+            </div>
+          </div>`;
+        grid.appendChild(card);
+      });
+
+      // attach events
+      $$('.btn.buy').forEach(b=>b.addEventListener('click',e=>{
+        const id = +e.currentTarget.dataset.id; const prod = PRODUCTS.find(x=>x.id===id);
+        window.open(`https://wa.me/3125785412?text=${encodeURIComponent('Hola! Me interesa: '+prod.name)}`,'_blank');
+      }));
+      $$('.btn.info').forEach(b=>b.addEventListener('click',e=>{
+        const id = +e.currentTarget.dataset.id; openModal(PRODUCTS.find(x=>x.id===id));
+      }));
+    }
+
+    // FILTER + SEARCH + SORT
+    const chips = $$('.chip');
+    chips.forEach(ch=>ch.addEventListener('click',()=>{
+      chips.forEach(c=>c.classList.remove('active')); ch.classList.add('active'); applyFilters();
+    }));
+    $('#search').addEventListener('input', ()=> applyFilters());
+    $('#order').addEventListener('change', ()=> applyFilters());
+
+    function applyFilters(){
+      const active = $('.chip.active').dataset.filter;
+      const q = $('#search').value.trim().toLowerCase();
+      let items = PRODUCTS.filter(p=> (active==='todos' || p.category===active));
+      if(q) items = items.filter(p=> p.name.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q));
+      const order = $('#order').value;
+      if(order==='name-asc') items.sort((a,b)=>a.name.localeCompare(b.name));
+      renderGrid(items);
+    }
+
+    // Modal
+    const modal = $('#modal');
+    function openModal(p){
+      $('#modal-img').src = p.img; $('#modal-title').textContent = p.name;
+      $('#modal-desc').textContent = p.desc; $('#modal-whatsapp').href = `https://wa.me/3125785412?text=${encodeURIComponent('Hola! Quiero más info sobre: '+p.name)}`;
+      modal.classList.add('open'); modal.setAttribute('aria-hidden','false');
+    }
+    $('#close-modal').addEventListener('click', ()=>{modal.classList.remove('open'); modal.setAttribute('aria-hidden','true');});
+    modal.addEventListener('click', (e)=>{ if(e.target===modal) { modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); } });
+
+
+
+    // Init
+    document.addEventListener('DOMContentLoaded', ()=>{
+      document.getElementById('year').textContent = new Date().getFullYear();
+      renderGrid(PRODUCTS);
+
+      // small accessibility: close modal with Esc
+      document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') { modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); } });
+    });
+  </script>
+</body>
+</html>
