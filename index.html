@@ -35,8 +35,9 @@
           <button class="chip active" data-filter="todos">Todos</button>
           <button class="chip" data-filter="aretes">Aretes</button>
           <button class="chip" data-filter="anillos">Anillos</button>
-          <button class="chip" data-filter="collares">Collares</button>
+          <button class="chip" data-filter="collares">Collar individual</button>
           <button class="chip" data-filter="pulseras">Pulseras</button>
+          <button class="chip" data-filter="combo">combo</button>
         </div>
         <div class="sort">
           <select id="order">
@@ -91,17 +92,24 @@
   <script>
     // Datos de ejemplo
     const PRODUCTS = [
-      {id:1,name:'Collar de flor amarilla',category:'collares',desc:'Elegantes Collar de flor amarilla .',img:'assets/collaramarillo.png'},
-      {id:2,name:'Collar con aretes',category:'collares',desc:'Collar con aretes.',img:'assets/collarColor.png'},
+      {id:1,name:'Collar de flor amarilla',category:'combo',desc:'Elegantes Collar de flor amarilla .',img:'assets/collaramarillo.png'},
+      {id:2,name:'Collar con aretes',category:'combo',desc:'Collar con aretes.',img:'assets/collarColor.png'},
       {id:3,name:'Arete Verde',category:'aretes',desc:'Arete verde brillante',img:'assets/areteverde.jpg'},
-      {id:4,name:'Collar con aretes',category:'collares',desc:'Diseño de collar amarillo diferente con aretes incluidos.',img:'assets/ama.png'},
-      {id:5,name:'Collar de flor azul con aretes',category:'collares',desc:'Collar de flor azul con aretes de combinacion incluidos',img:'assets/blueflower.jpg'},
-      {id:6,name:'Collar de flor de colores con aretes de mismo color',category:'collares',desc:'collar de flores de coloresc con aretes con misma combinacion de colores',img:'assets/collred.jpg'},
+      {id:4,name:'Collar con aretes',category:'combo',desc:'Diseño de collar amarillo diferente con aretes incluidos.',img:'assets/ama.png'},
+      {id:5,name:'Collar de flor azul con aretes',category:'combo',desc:'Collar de flor azul con aretes de combinacion incluidos',img:'assets/blueflower.jpg'},
+      {id:6,name:'Collar de flor de colores con aretes de mismo color',category:'combo',desc:'collar de flores de coloresc con aretes con misma combinacion de colores',img:'assets/collred.jpg'},
       {id:7,name:'Collar de colores ',category:'collares',desc:'Collar de colores.',img:'assets/collcolored.jpg'},
       {id:8,name:'Aretes multi color',category:'aretes',desc:'Aretes de flor de dos colores a elegir',img:'assets/aretesmulticolor.jpg'},
-      {id:9,name:'collar',category:'collares',desc:'Collar de colores',img:'assets/C1.jpg'},
-      {id:10,name:'collar amarillo',category:'collares',desc:'Collar amarillo',img:'assets/C2.jpg'},
-      {id:10,name:'collar ',category:'collares',desc:'Collar ',img:'assets/C3.jpg'},
+      {id:9,name:'collar',category:'combo',desc:'Collar de colores',img:'assets/C1.jpg'},
+      {id:10,name:'collar amarillo',category:'combo',desc:'Collar amarillo',img:'assets/C2.jpg'},
+      {id:11,name:'Arete blanco ',category:'aretes',desc:'Arete ',img:'assets/A1.jpg'},
+      {id:12,name:'Aretes de color ',category:'aretes',desc:'Arete ',img:'assets/A2.jpg'},
+      {id:13,name:'Arete ',category:'aretes',desc:'Arete ',img:'assets/A3.jpg'},
+      {id:14,name:'combo arete y pulsera ',category:'combo',desc:'Arete ',img:'assets/A4.jpg'},
+      {id:15,name:'Aretes de mariposa ',category:'arete',desc:'Aretes de mariposa negra y morado ',img:'assets/A5.jpg'},
+      {id:16,name:'Arete colombiano ',category:'arete',desc:'Aretecon los colores de la abandera colombiana ',img:'assets/A6.jpg'},
+      {id:17,name:'combo collar negro  y aretes ',category:'combo',desc:'Collar negro y arete ',img:'assets/C4.png'},
+      {id:18,name:' collar de mariposa monarca ',category:'collares',desc:'Collar mariposa monarca ',img:'assets/C5.png'},
     ];
 
     // Helpers
