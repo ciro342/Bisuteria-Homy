@@ -850,3 +850,61 @@ footer{padding:30px 20px;text-align:center;color:var(--muted);font-size:14px;mar
 ::-webkit-scrollbar-thumb:hover {
   background: var(--gold);
 }
+
+/* BOTÓN COMPRAR EN MODAL */
+.btn-comprar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 32px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-2));
+  color: #111;
+  font-weight: 700;
+  font-size: 16px;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+  width: 100%;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.btn-comprar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(212, 175, 55, 0.4);
+}
+
+.btn-comprar:active {
+  transform: translateY(0);
+}
+
+.btn-comprar svg {
+  transition: transform 0.2s ease;
+}
+
+.btn-comprar:hover svg {
+  transform: scale(1.1);
+}
+
+/* Modal body mejorado */
+.modal-body {
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-height: 300px;
+}
+
+/* Responsive */
+@media(max-width:640px){
+  .btn-comprar {
+    padding: 14px 24px;
+    font-size: 15px;
+  }
+  
+  .modal-body {
+    padding: 20px;
+  }
+}

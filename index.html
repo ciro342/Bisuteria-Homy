@@ -69,25 +69,27 @@
   <footer>
     © <span id="year"></span> Bella Joya — Hecho a mano · <a href="https://wa.me/3125785412">WhatsApp</a>
   </footer>
-
-  <!-- Modal detalle -->
-  <div id="modal" class="modal" role="dialog" aria-modal="true" aria-hidden="true">
-    <div class="modal-card" role="document">
-      <div class="modal-media"><img id="modal-img" src="" alt=""></div>
-      <div class="modal-body">
-        <div style="display:flex;gap:8px;align-items:center">
-          <div style="font-size:18px;font-weight:700" id="modal-title"></div>
-          <button class="close" id="close-modal" aria-label="Cerrar">✕</button>
-        </div>
-        <div style="color:var(--muted)" id="modal-desc"></div>
-        <div style="display:flex;gap:8px;margin-top:12px">
-    <a id="modal-whatsapp" class="btn buy" target="_blank" rel="noopener noreferrer">
-        <i class="fab fa-whatsapp"></i> Pedir por WhatsApp
-    </a>
-</div>
+<!-- Modal detalle -->
+<div id="modal" class="modal" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="modal-card" role="document">
+    <div class="modal-media"><img id="modal-img" src="" alt=""></div>
+    <div class="modal-body">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start">
+        <h3 style="font-size:22px;font-weight:700;margin:0;flex:1" id="modal-title"></h3>
+        <button class="close" id="close-modal" aria-label="Cerrar">✕</button>
       </div>
+      <p style="color:var(--muted);line-height:1.6;margin:0" id="modal-desc"></p>
+      <a id="modal-whatsapp" class="btn-comprar" target="_blank" rel="noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="9" cy="21" r="1"></circle>
+          <circle cx="20" cy="21" r="1"></circle>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+        </svg>
+        <span>Comprar</span>
+      </a>
     </div>
   </div>
+</div>
 
   <script>
     // Datos de ejemplo
