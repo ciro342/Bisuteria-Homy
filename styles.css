@@ -888,7 +888,6 @@ footer{padding:30px 20px;text-align:center;color:var(--muted);font-size:14px;mar
   transform: scale(1.1);
 }
 
-/* Modal body mejorado */
 .modal-body {
   padding: 28px;
   display: flex;
@@ -897,7 +896,6 @@ footer{padding:30px 20px;text-align:center;color:var(--muted);font-size:14px;mar
   min-height: 300px;
 }
 
-/* Responsive */
 @media(max-width:640px){
   .btn-comprar {
     padding: 14px 24px;
